@@ -1,0 +1,30 @@
+<?xmls version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:annotation-config />
+
+    <context:component-scan base-package="com.tuwaner"/>
+
+    <bean id="beforeMethod" class="com.tuwaner.BeforeMethod" />
+    <aop:config>
+        <aop:pointcut id="beforePoint" expression="execution(* com.tuwaner.*..*(..))" />
+        <aop:advisor pointcut-ref="beforePoint" id="beforeAdvice" advice-ref="beforeMethod" />
+    </aop:config>
+    <!--<bean id="customerService" class="com.tuwaner.CustomerService">
+        <property name="name" value="spring" />
+        <property name="url" value="http://www.spring.io" />
+    </bean>-->
+<!--
+    <bean id="beforeMethodBean" class="com.tuwaner.BeforeMethod" />
+    <bean id="customerServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="customerService" />
+        <property name="interceptorNames">
+            <list>
+                <value>beforeMethodBean</value>
+            </list>
+        </property>
+    </bean>-->
+</beans>
